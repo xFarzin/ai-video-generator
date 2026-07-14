@@ -44,7 +44,18 @@ def upload_video(video_path, title, description, tags=None):
     """Upload video to YouTube"""
     
     youtube = get_youtube_service()
+
     
+    channel = youtube.channels().list(
+        part="snippet",
+        mine=True
+    ).execute()
+
+    print("Connected channel:")
+    print(channel["items"][0]["snippet"]["title"])
+    print("Channel ID:", channel["items"][0]["id"])
+
+
     if tags is None:
         tags = ["ai", "automation", "facts"]
     
