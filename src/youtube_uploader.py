@@ -42,10 +42,10 @@ def get_youtube_service():
 
 def upload_video(video_path, title, description, tags=None):
     """Upload video to YouTube"""
-    
+    print("Creating YouTube service...")
     youtube = get_youtube_service()
 
-    
+
     channel = youtube.channels().list(
         part="snippet",
         mine=True
@@ -73,13 +73,13 @@ def upload_video(video_path, title, description, tags=None):
     }
     
     media = MediaFileUpload(video_path, mimetype='video/mp4', resumable=True)
-    
+    print("Preparing upload request...")
     request = youtube.videos().insert(
         part=','.join(body.keys()),
         body=body,
         media_body=media
     )
-    
+    print("Starting upload...")
     response = None
     while response is None:
         status, response = request.next_chunk()
