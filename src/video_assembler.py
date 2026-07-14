@@ -91,7 +91,7 @@ def create_video(image_paths, audio_paths, output_path="output/final_video.mp4")
         print("=" * 60)
 
         render_start = time.time()
-
+        print("Calling write_videofile()...")
         final_clip.write_videofile(
             output_path,
             fps=24,
@@ -101,7 +101,7 @@ def create_video(image_paths, audio_paths, output_path="output/final_video.mp4")
             remove_temp=True,
             logger="bar"
         )
-
+        print("write_videofile() returned")
         print(
             f"Render completed in "
             f"{time.time() - render_start:.2f} sec"
